@@ -1,0 +1,37 @@
+$primary-color: #31e1f7;
+
+.home {
+  margin: 4rem;
+  background-color: rgba(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & div {
+    margin: 1.3rem;
+
+    & a:link,
+    & a:visited {
+      text-decoration: none;
+      font-size: 4rem;
+      color: $primary-color;
+      letter-spacing: 0.2rem;
+      font-weight: 500;
+    }
+
+    & a:hover {
+      color: rgba($primary-color, 0.7);
+    }
+
+    & a::after {
+      content: "\21D2";
+      opacity: 0;
+      margin-left: 0.8rem;
+      color: #33a8b5;
+      font-size: 4rem;
+    }
+    & a:hover::after {
+      opacity: 1;
+    }
+  }
+}

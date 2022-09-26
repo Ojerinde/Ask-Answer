@@ -1,0 +1,33 @@
+.comment {
+  &__card {
+    width: 70%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+
+    & div {
+      width: 100%;
+      text-align: right;
+      background-color: rgba(255, 255, 255, 0.891);
+      color: rgb(91, 162, 190);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.06rem;
+
+      & span {
+        margin-left: 2rem;
+      }
+    }
+
+    & p {
+      width: 100%;
+      padding: 0.5rem;
+      color: rgb(39, 100, 119);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.09rem;
+      margin-top: 1rem;
+      border: 0.1rem solid rgba(104, 157, 178, 0.498);
+    }
+  }
+}

@@ -1,0 +1,44 @@
+$primary-color: #31e1f7;
+
+.question__detail {
+  &--button {
+    margin: 1rem;
+  }
+
+  &--card {
+    width: 90%;
+    margin: 1rem auto;
+    & h3 {
+      font-size: 1.6rem;
+    }
+    & p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+
+    & figure {
+      width: 100%;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+
+      & img {
+        flex-basis: 30%;
+        margin: 0 auto 1.5rem auto;
+        height: 15rem;
+        object-fit: cover;
+        z-index: 10;
+        border: 0.15rem solid $primary-color;
+        cursor: pointer;
+
+      }
+    }
+    &-btn {
+      width: 100%;
+      text-align: right;
+    }
+  }
+}
+.margin__right {
+  margin-right: 1rem;
+}

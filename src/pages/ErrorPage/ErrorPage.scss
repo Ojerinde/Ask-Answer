@@ -1,0 +1,23 @@
+$primary-color: #31e1f7;
+
+.error__card {
+  width: 60%;
+  margin: 8rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & h2 {
+    font-size: 3rem;
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+  }
+
+  & button {
+    width: fit-content;
+    font-size: 1.8rem;
+    font-weight: 300;
+    padding: 1rem 1.3rem;
+    color: #11363b;
+  }
+}

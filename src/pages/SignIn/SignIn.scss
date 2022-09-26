@@ -1,0 +1,12 @@
+$primary-color: #31e1f7;
+
+.sign_in {
+  width: 45%;
+  margin: 8rem auto;
+
+  & h4 {
+    font-size: 3.5rem;
+    color: $primary-color;
+    margin-bottom: 2rem;
+  }
+}
