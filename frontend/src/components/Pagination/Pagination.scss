@@ -1,0 +1,66 @@
+.pagination {
+  &__card {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__icons--box {
+    flex-basis: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__icons--prev,
+  &__icons--next {
+    height: 2rem;
+    width: 2rem;
+    fill: rgb(52, 68, 68);
+    cursor: pointer;
+
+    &:hover {
+        fill: rgb(70, 117, 117);
+    }
+  }
+
+  &__icons--paragraph {
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgba(33, 34, 34, 0.916);
+  }
+
+  &__buttons {
+    flex-basis: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    & button {
+        text-align: center;
+        padding: .5rem 1rem;
+        margin: 0 .3rem .3rem .3rem;
+        font-size: 1rem;
+        background-color: rgba(17, 41, 41, 0.748);
+        color: rgb(140, 244, 244);
+        border-radius: .5rem;
+        border: .2rem solid transparent;
+
+        &:hover {
+        border: .2rem solid rgb(43, 241, 241); 
+        background-color: rgb(70, 117, 117);    
+        }
+
+        &:focus {
+        border: .2rem solid rgb(36, 206, 206);      
+
+        }
+    }
+  }
+}
+
+.not__allowed {
+    cursor:not-allowed !important;
+    fill: rgb(167, 206, 213) !important;
+}

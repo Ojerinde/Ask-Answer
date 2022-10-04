@@ -1,0 +1,106 @@
+$primary-color: #31e1f7;
+$primary-light-color: #50e8fc;
+$primary-dark-color: #2db8ca;
+
+.main__page {
+  margin: 5rem auto 0 auto;
+  width: 80%;
+
+  & h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 3.5rem;
+    color: $primary-color;
+    text-transform: capitalize;
+    margin-bottom: 4rem;
+  }
+
+  & h4 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: $primary-dark-color;
+    margin-bottom: 1.8rem;
+  }
+
+  & ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0;
+
+    & li {
+      flex-basis: 30%;
+      height: 60vh;
+      padding: 1.5rem;
+      border-top-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      border: 0.2rem solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: #3a93f2ea;
+
+      &:hover {
+        border: 0.2rem solid rgb(10, 46, 136);
+        transition: all 0.3s ease-in-out;
+      }
+
+      &:hover .icons {
+        animation: bounce 2s infinite linear;
+      }
+
+      & .icons {
+        height: 4rem;
+        width: 4rem;
+        fill: #31e1f7;
+      }
+      & a:link,
+      & a:visited {
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 600;
+        color: $primary-color;
+        text-align: center;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        transition: all 0.3s;
+      }
+
+      & a:hover {
+        color: rgb(10, 46, 136);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// Typewriter Effect
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.2rem;
+  animation: typing 5s steps(40, end);
+  //   animation-delay: 20s;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: rotate(0deg) ;
+  }
+  100% {
+    transform: rotate(360deg) ;
+  }
+}

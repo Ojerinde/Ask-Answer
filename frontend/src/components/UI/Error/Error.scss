@@ -1,0 +1,40 @@
+.error__box {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 70vh;
+  background-color: rgba(62, 201, 243, 0.733);
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  backdrop-filter: blur(.2rem);
+  z-index: 10;
+  animation: errorAnimation .5s linear;
+}
+.error__message {
+  color: rgb(88, 81, 81);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+@keyframes errorAnimation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.close__message {
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  fill: rgb(58, 61, 61);
+  height: 0.9rem;
+  height: 0.9rem;
+  cursor: pointer;
+}
