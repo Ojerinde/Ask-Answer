@@ -23,7 +23,7 @@ const AllQuestion = (props) => {
   const [allQuestions, setAllQuestions] = useState({
     questions: [],
     total_questions: 0,
-    answered_questions: 0
+    answered_questions: 0,
   });
 
   const end = start + QUESTION_PER_PAGE;
@@ -62,7 +62,7 @@ const AllQuestion = (props) => {
       setAllQuestions({
         questions: data.questions,
         total_questions: data.total_questions,
-        answered_questions: data.answered_questions
+        answered_questions: data.answered_questions,
       });
     };
     getQuestions(
@@ -84,7 +84,7 @@ const AllQuestion = (props) => {
     setAllQuestions({
       questions: data.questions,
       total_questions: data.total_questions,
-      answered_questions: data.answered_questions
+      answered_questions: data.answered_questions,
     });
   };
 
@@ -132,7 +132,12 @@ const AllQuestion = (props) => {
         />
         <Route
           path=":question_Id"
-          element={<QuestionDetail pathname={pathname.slice(0, lastIndex)} />}
+          element={
+            <QuestionDetail
+              onDelete={onDeleteHandler}
+              pathname={pathname.slice(0, lastIndex)}
+            />
+          }
         >
           <Route path="comments" element={<CommentBox />} />
         </Route>

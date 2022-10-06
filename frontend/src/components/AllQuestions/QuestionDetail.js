@@ -63,6 +63,26 @@ const QuestionDetail = (props) => {
     closeError();
     navigate(`${props.pathname}`);
   };
+  const deleteHandler = () => {
+    const alertUser = prompt(`Are you sure? "Yes" to delete, "No" to go back"`);
+
+    if (alertUser === "No") return;
+
+    getQuestion(
+      {
+        url: `/frontend/all_questions/${question_Id}`,
+        method: "DELETE",
+        errorMessage: "Question does not exist",
+      },
+      // A fn to pass new questions to the parent.
+      props.onDelete
+    );
+
+    if(!isLoading && !error.hasError) {
+      navigate(`/frontend/all_questions`);
+    }
+  };
+
 
 
   return (
@@ -94,6 +114,7 @@ const QuestionDetail = (props) => {
             >
               Answer
             </Button>
+            <Button onClick={deleteHandler}>Delete</Button>
           </div>
         </Card>
       )}

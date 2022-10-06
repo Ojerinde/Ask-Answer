@@ -24,3 +24,34 @@ $primary-color: #31e1f7;
     transform: rotate(360deg);
   }
 }
+
+.boundary__error {
+  width: 100%;
+  height: 100vh;
+  font-size: 2.5rem;
+  color: rgb(39, 215, 238);
+  font-weight: 500;
+  letter-spacing: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & button {
+    margin-top: 2rem;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    color: rgb(32, 119, 136);
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: rgb(32, 119, 136);
+      color: rgb(255, 255, 255);
+    }
+  }
+}
+

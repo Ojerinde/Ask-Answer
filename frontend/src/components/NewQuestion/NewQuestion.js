@@ -66,9 +66,9 @@ const NewQuestion = () => {
     });
 
     if (isLoading || (!isLoading && error.hasError)) {
+      console.log('okay')
       return;
     }
-    navigate(`${pathname.slice(0, lastIndex)}/all_questions`);
   };
 
   if (isLoading) {

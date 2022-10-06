@@ -3,6 +3,7 @@
 # dependencies
 /env
 /migrations
+/__pycache__
 
 
 # production

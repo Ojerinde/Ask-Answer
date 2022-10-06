@@ -6,10 +6,7 @@ import Card from "../UI/Card/Card";
 
 import "./Question.scss";
 const Question = (props) => {
-  const {
- 
-    fetchRequest: deleteQuestion,
-  } = useFetch();
+  const { fetchRequest: moveQuestion } = useFetch();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -19,32 +16,17 @@ const Question = (props) => {
 
     navigate(`${pathname}/` + props.id);
   };
-  const deleteHandler = () => {
-    const alertUser = prompt(`Are you sure? "Yes" to delete, "No" to go back"`);
-
-    if (alertUser === "No") return;
-
-    deleteQuestion(
-      {
-        url: `/frontend/all_questions/${props.id}`,
-        method: "DELETE",
-        errorMessage: "Question does not exist",
-      },
-      // A fn to pass new questions to the parent.
-      props.onDelete
-    );
-  };
 
   const moveToAnsweredPageHandler = () => {
-    deleteQuestion(
+    moveQuestion(
       {
         url: `/frontend/all_questions/${props.id}`,
-        method: 'PATCH',
+        method: "PATCH",
         errorMessage: "Request failed",
       },
       props.onDelete
     );
-  }
+  };
 
   return (
     <Card className="question__card">
@@ -54,7 +36,6 @@ const Question = (props) => {
       </div>
       <div className="question__button">
         <Button onClick={viewButtonHandler}>View</Button>
-        <Button onClick={deleteHandler}>Delete</Button>
         {/* Button to move to answered question page */}
         <Button onClick={moveToAnsweredPageHandler}>Answered</Button>
       </div>

@@ -13,6 +13,8 @@ class Question(db.Model):
     description = db.Column(db.String,  nullable=False)
     images = db.Column(db.String)
     answered = db.Column(db.Boolean)
+    comments = db.relationship('Comment', backref="venue", lazy=True, cascade="all, delete-orphan")
+    
 
     def __init__(self, title, description, images):
         self.title = title
@@ -37,9 +39,7 @@ class Question(db.Model):
             'title': self.title,
             'description': self.description,
             'images': self.images.split(','),
-            'answered': self.answered
         }
-
 
 class Comment(db.Model):
     __tablename__ = 'comments'
