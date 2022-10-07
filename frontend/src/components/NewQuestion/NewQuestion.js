@@ -2,7 +2,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 
 // React hooks
-import { useState } from "react";
+import React,{ useState } from "react";
 
 // Custom hook
 import useFetch from "../../hooks/useFetch";
@@ -65,10 +65,6 @@ const NewQuestion = () => {
       },
     });
 
-    if (isLoading || (!isLoading && error.hasError)) {
-      console.log('okay')
-      return;
-    }
   };
 
   if (isLoading) {
@@ -119,4 +115,4 @@ const NewQuestion = () => {
     </>
   );
 };
-export default NewQuestion;
+export default React.memo(NewQuestion);

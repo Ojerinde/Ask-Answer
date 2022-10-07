@@ -25,7 +25,7 @@ def after_request(response):
     response.headers.add("Allow-Control-Allow-Headers",
                          "Content-Type,Authorization,true")
     response.headers.add("Access-Control-Allow-Methods",
-                         "GET,PATCH,POST,DELETE,OPTIONS")
+                         "GET,PATCH,POST,PUT,DELETE,OPTIONS")
     return response
 
 # A function to seperate answered questions from unanswered questions
@@ -69,7 +69,11 @@ def create_question():
     title = body.get('title', None)
     question = body.get('question', None)
     images_list = body.get('images', None)
-    images = ",".join(images_list)
+
+    # Run the following if only there is a list of image
+    images = ''
+    if images_list:
+        images = ",".join(images_list)
 
     try:
         # Checking if required fields are filled
@@ -140,7 +144,7 @@ def move_question_to_answered_page(question_id):
 
         new_query = Question.query.order_by(Question.id).all()
 
-        if len(query) == 0:
+        if len(new_query) == 0:
             abort(404)
 
         questions = type_check(new_query, False)
@@ -167,7 +171,7 @@ def get_answered_questions():
         questions = type_check(query, True)
 
         return jsonify({
-            'question': questions,
+            'questions': questions,
             'total_questions': len(questions),
         })
     except:
@@ -221,6 +225,7 @@ def filter_questions():
 @app.route('/frontend/all_questions/<int:id>')
 def delete_question(id):
     query = Question.query.get(id)
+    print(query)
     try:
         if not query:
             abort(404)
@@ -244,11 +249,11 @@ def delete_question(id):
 
 
 # Get all questios route
-@app.route('/frontend/aanswered_questions/<int:id>')
+@app.route('/frontend/answered_questions/comments/<int:id>')
 def get_comments(id):
-    query = Comment.query.order_by(Comment.id).all()
+    query = Comment.query.filter_by(id=id).all()
 
-    # Checking if there is or are comment
+    # Checking if there is or are comments
     if len(query) == 0:
         abort(404)
 

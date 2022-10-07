@@ -30,7 +30,7 @@ const AnsweredQuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `/frontend/answered_questions/${Id}`,
+        url: `/frontend/answered_questions/comments/${Id}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
