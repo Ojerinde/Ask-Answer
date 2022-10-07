@@ -2,7 +2,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 
 // React hooks
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 // Custom hook
 import useFetch from "../../hooks/useFetch";
@@ -16,6 +16,7 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 // Style
 import "./NewQuestion.scss";
+import Modal from "../UI/Modal/Modal";
 
 const NewQuestion = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const NewQuestion = () => {
   const [title, setTitle] = useState("");
   const [question, setQuestion] = useState("");
   const [images, setImages] = useState([]);
+
 
   const {
     isLoading,
@@ -51,20 +53,24 @@ const NewQuestion = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await AddQuestion({
-      url: "/frontend/add_question",
-      errorMessage: "Failed to create question",
-      method: "POST",
-      body: {
-        title: title,
-        question: question,
-        images: images,
+    await AddQuestion(
+      {
+        url: "/frontend/add_question",
+        errorMessage: "Failed to create question",
+        method: "POST",
+        body: {
+          title: title,
+          question: question,
+          images: images,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
+      (response) => {
+        if (response) navigate("/frontend/all_questions");
+      }
+    );
   };
 
   if (isLoading) {
@@ -74,6 +80,7 @@ const NewQuestion = () => {
   const closeErrorHandler = () => {
     closeError();
   };
+ 
 
   return (
     <>

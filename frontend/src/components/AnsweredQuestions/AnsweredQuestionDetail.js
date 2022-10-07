@@ -30,7 +30,7 @@ const AnsweredQuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `/frontend/answered_questions/comments/${Id}`,
+        url: `/frontend/answered_questions/${Id}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
@@ -40,6 +40,7 @@ const AnsweredQuestionDetail = (props) => {
   const goBackHandler = () => {
     navigate(`${props.pathname}`);
   };
+
   if (isLoading) return <LoadingSpinner />;
 
   return (

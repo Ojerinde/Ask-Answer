@@ -28,7 +28,7 @@ const Comments = (props) => {
     };
     getComments(
       {
-        url: `/frontend/answered_questions/${props.id}`,
+        url: `/frontend/answered_questions/comments/${props.id}`,
         errorMessage: "Could not fetch comments",
       },
       getCommentsFromRequest
@@ -46,9 +46,9 @@ const Comments = (props) => {
       {allComments.comments?.map((comment) => (
         <Comment
           key={comment.id}
-          name={comment.title}
+          name={comment.name}
           date={comment.date}
-          comment={comment.description}
+          comment={comment.answer}
         />
       ))}
     </>

@@ -248,10 +248,10 @@ def delete_question(id):
 
 
 
-# Get all questios route
+# Get a question comments 
 @app.route('/frontend/answered_questions/comments/<int:id>')
 def get_comments(id):
-    query = Comment.query.filter_by(id=id).all()
+    query = Comment.query.filter_by(question_id=id).all()
 
     # Checking if there is or are comments
     if len(query) == 0:
