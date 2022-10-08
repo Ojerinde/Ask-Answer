@@ -6,7 +6,6 @@ import useFetch from "../../hooks/useFetch";
 
 import { useRef } from "react";
 
-import "./SearchBox.scss";
 const SearchBox = (props) => {
   const { fetchRequest: searchQuestions } = useFetch();
 

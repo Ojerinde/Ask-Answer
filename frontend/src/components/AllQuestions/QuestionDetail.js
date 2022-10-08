@@ -11,7 +11,6 @@ import Card from "../UI/Card/Card";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Error from "../UI/Error/Error";
 
-import "./QuestionDetail.scss";
 const QuestionDetail = (props) => {
   const [question, setQuestion] = useState({});
   const [clicked, setClicked] = useState(false);

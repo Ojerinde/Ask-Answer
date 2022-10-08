@@ -9,7 +9,6 @@ import useFetch from "../../hooks/useFetch";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Error from "../UI/Error/Error";
 
-import "./AnsweredQuestionDetail.scss";
 const AnsweredQuestionDetail = (props) => {
   const [question, setQuestion] = useState({});
 

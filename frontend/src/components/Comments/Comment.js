@@ -1,6 +1,5 @@
 import Card from "../UI/Card/Card";
 
-import "./Comment.scss";
 const Comment = (props) => {
   return (
     <Card className='comment__card'>

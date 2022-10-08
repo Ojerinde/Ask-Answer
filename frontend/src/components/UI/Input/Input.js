@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./Input.scss";
 
 const Input = React.forwardRef((props, ref) => {
   const { field = "input", ...others } = props;

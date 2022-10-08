@@ -9,7 +9,6 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import AnsweredQuestion from "./AnsweredQuestion";
 import AnsweredQuestionDetail from "./AnsweredQuestionDetail";
 
-import "./AnsweredQuestions.scss";
 const AnsweredQuestions = () => {
   const { pathname } = useLocation();
   const lastIndex = pathname.lastIndexOf("/");

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ImPrevious, ImNext } from "react-icons/im";
 import Card from "../UI/Card/Card";
 
-import "./Pagination.scss";
 
 const Pagination = (props) => {
   const questionPerPage = props.questionPerPage;

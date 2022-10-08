@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/logo.png";
 
-import "./MainHeader.scss";
 const MainHeader = () => {
   return (
     <header className="home__header">

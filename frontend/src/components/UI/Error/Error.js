@@ -1,6 +1,5 @@
 import { ImCross } from "react-icons/im";
 
-import "./Error.scss";
 const Error = (props) => {
   return (
     <div className="error__box">

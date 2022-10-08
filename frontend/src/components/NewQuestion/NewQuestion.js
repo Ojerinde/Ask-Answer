@@ -1,5 +1,5 @@
 // React Router Hooks
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // React hooks
 import React, { useState } from "react";
@@ -14,14 +14,11 @@ import Input from "../UI/Input/Input";
 import Error from "../UI/Error/Error";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
-// Style
-import "./NewQuestion.scss";
-import Modal from "../UI/Modal/Modal";
+// import Modal from "../UI/Modal/Modal";
 
 const NewQuestion = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const lastIndex = pathname.lastIndexOf("/");
+
 
   const [title, setTitle] = useState("");
   const [question, setQuestion] = useState("");
@@ -68,6 +65,7 @@ const NewQuestion = () => {
         },
       },
       (response) => {
+        console.log(response)
         if (response) navigate("/frontend/all_questions");
       }
     );

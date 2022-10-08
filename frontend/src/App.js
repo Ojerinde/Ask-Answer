@@ -3,7 +3,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { ImSpinner4 } from "react-icons/im";
-import "./App.scss";
 
 // import Home from "./pages/Home/Home";
 // import SignIn from "./pages/SignIn/SignIn";

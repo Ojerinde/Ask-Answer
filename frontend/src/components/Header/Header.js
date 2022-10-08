@@ -1,7 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 
-import "./Header.scss";
 const Header = (props) => {
   const navigate = useNavigate();
   const goHomeHandler = () => {

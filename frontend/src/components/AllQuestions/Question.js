@@ -4,7 +4,6 @@ import useFetch from "../../hooks/useFetch";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 
-import "./Question.scss";
 const Question = (props) => {
   const { fetchRequest: moveQuestion } = useFetch();
 

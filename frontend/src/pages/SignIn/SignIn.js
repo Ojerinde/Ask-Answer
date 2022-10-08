@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button/Button";
 import Card from "../../components/UI/Card/Card";
 
-import "./SignIn.scss";
 const SignIn = () => {
   const navigate = useNavigate();
   const GoHomeHandler = () => {

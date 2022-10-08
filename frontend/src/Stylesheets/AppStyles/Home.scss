@@ -1,12 +1,9 @@
-$primary-color: #31e1f7;
-
 .home {
   margin: 4rem;
-  background-color: rgba(255, 255, 255);
-  display: flex;
+  background-color: $back-color;
+  @include flex-center;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
   & div {
     margin: 1.3rem;
 

@@ -3,7 +3,6 @@ import { lazy, Suspense } from "react";
 import { ImLock, ImKey, ImUnlocked, ImSpinner4 } from "react-icons/im";
 
 import Header from "../../components/Header/Header";
-import "./MainPage.scss";
 
 const NewQuestion = lazy(() =>
   import("../../components/NewQuestion/NewQuestion")

@@ -4,9 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 import Error from "../UI/Error/Error";
-import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+// import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
-import "./CommentBox.scss";
 const CommentBox = (props) => {
   const [inputState, setInputState] = useState({ answer: "", name: "" });
 
@@ -40,17 +39,20 @@ const CommentBox = (props) => {
   const addCommentHandler = (e) => {
     e.preventDefault();
 
-    AddComment({
-      url: `http://localhost:5000/frontend/all_questions/${params.question_Id}/comments`,
-      method: "POST",
-      body: { answer: inputState.answer, name: inputState.name },
-      headers: {
-        "Content-Type": "application/json",
+    AddComment(
+      {
+        url: `http://localhost:5000/frontend/all_questions/${params.question_Id}/comments`,
+        method: "POST",
+        body: { answer: inputState.answer, name: inputState.name },
+        headers: {
+          "Content-Type": "application/json",
+        },
+        errorMessage: "Failed to add comment",
       },
-      errorMessage: "Failed to add comment",
-    });
-
-    // navigate(`${pathname.slice(0, lastIndex)}`);
+      (response) => {
+        if (response) navigate(`${pathname.slice(0, lastIndex)}`);
+      }
+    );
   };
   const closeErrorHandler = () => {
     closeError();

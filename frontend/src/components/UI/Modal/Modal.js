@@ -1,6 +1,5 @@
 import ReactDOM from "react-dom";
 
-import "./Modal.scss"
 const Overlay = (props) => {
   return <p className="backdrop" onClick={props.onClick}>{props.message}</p>;
 };

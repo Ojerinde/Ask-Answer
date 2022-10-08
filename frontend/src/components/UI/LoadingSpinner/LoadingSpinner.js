@@ -1,7 +1,6 @@
 import { ImSpinner11 } from "react-icons/im";
 import Card from "../Card/Card";
 
-import "./LoadingSpinner.scss";
 const LoadingSpinner = () => {
   return (
     <Card className="spinner__box">

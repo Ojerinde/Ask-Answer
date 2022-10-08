@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 
-import "./AnsweredQuestion.scss";
 const AnsweredQuestion = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
