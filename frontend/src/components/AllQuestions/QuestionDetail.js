@@ -12,6 +12,8 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Error from "../UI/Error/Error";
 
 const QuestionDetail = (props) => {
+  const { pathname: parentPath } = props;
+  
   const [question, setQuestion] = useState({});
   const [clicked, setClicked] = useState(false);
 
@@ -38,7 +40,7 @@ const QuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `/frontend/all_questions/${question_Id}`,
+        url: `${parentPath}/${question_Id}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
@@ -77,12 +79,11 @@ const QuestionDetail = (props) => {
       props.onDelete
     );
 
-    if(!isLoading && !error.hasError) {
+    if (!isLoading && !error.hasError) {
       navigate(`/frontend/all_questions`);
     }
   };
-
-
+  console.log(question);
 
   return (
     <>

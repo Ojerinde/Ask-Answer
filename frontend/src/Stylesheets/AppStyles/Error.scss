@@ -3,9 +3,9 @@
   top: 20%;
   right: 0;
   @include flex-center;
-  width: 25%;
+  width: 25% ;
   height: 70vh;
-  background-color: rgba(62, 201, 243, 0.733);
+  background-color: rgba(62, 201, 243, 0.733) ;
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
   backdrop-filter: blur(.2rem);

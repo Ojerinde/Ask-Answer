@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -35,12 +35,12 @@ const AnsweredQuestions = () => {
 
     getAnsweredQuestions(
       {
-        url: "/frontend/answered_questions",
+        url: `${pathname.slice(0 , lastIndex)}/answered_questions`,
         errorMessage: "Could not fetch questions",
       },
       getData
     );
-  }, [getAnsweredQuestions]);
+  }, [getAnsweredQuestions, pathname, lastIndex]);
 
   const closeErrorHandler = () => {
     closeError();
@@ -82,4 +82,4 @@ const AnsweredQuestions = () => {
     </>
   );
 };
-export default AnsweredQuestions;
+export default React.memo(AnsweredQuestions);

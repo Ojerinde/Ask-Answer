@@ -14,6 +14,7 @@ const AnsweredQuestionDetail = (props) => {
 
   const navigate = useNavigate();
   const { Id } = useParams();
+  const { pathname } = props;
 
   const {
     isLoading,
@@ -29,12 +30,12 @@ const AnsweredQuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `/frontend/answered_questions/${Id}`,
+        url: `${pathname}/${Id}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
     );
-  }, [Id, getQuestion]);
+  }, [Id, getQuestion, pathname]);
 
   const goBackHandler = () => {
     navigate(`${props.pathname}`);

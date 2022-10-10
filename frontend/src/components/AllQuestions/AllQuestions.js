@@ -18,6 +18,8 @@ const AllQuestion = (props) => {
   const { pathname } = useLocation();
   const lastIndex = pathname.lastIndexOf("/");
 
+  
+
   const [start, setStart] = useState(0);
 
   const [allQuestions, setAllQuestions] = useState({
@@ -67,13 +69,13 @@ const AllQuestion = (props) => {
     };
     getQuestions(
       {
-        url: "/frontend/all_questions",
+        url: `${pathname.slice(0 , lastIndex)}/all_questions`,
         errorMessage: "Could not fetch questions",
       },
       // The data will be passed to this function and then we can setAllquestion. Calling allQuestions here will cause infinte loop.
       getQuestionsFromRequest
     );
-  }, [getQuestions]);
+  }, [getQuestions,pathname, lastIndex]);
 
   const closeErrorHandler = () => {
     // A function to close the error. coming from useFetch
@@ -139,7 +141,7 @@ const AllQuestion = (props) => {
             />
           }
         >
-          <Route path="comments" element={<CommentBox />} />
+          <Route path="comments" element={<CommentBox pathname={pathname}/>} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>

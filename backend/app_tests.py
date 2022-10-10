@@ -149,3 +149,22 @@ def client():
 #     assert response.status_code == 404
 #     assert response_data['success'] == False
 #     assert response_data['message'] == "Resources not found"
+
+
+# def test_post_comment_pass(client):
+#     body = {'name': "Joel",
+#             'answer': "Are you sure?"}
+#     response = client.post('/frontend/all_questions/1/comments',
+#                            data=json.dumps(body), content_type='application/json')
+#     response_data = json.loads(response.data)
+
+#     assert response.status_code == 200
+#     assert response_data['success'] == True
+
+# def test_post_comment_fail(client):
+#     response = client.post('/frontend/all_questions/100/comments')
+#     response_data = json.loads(response.data)
+
+#     assert response.status_code == 400
+#     assert response_data['success'] == False
+#     assert response_data['message'] == "Bad Request"

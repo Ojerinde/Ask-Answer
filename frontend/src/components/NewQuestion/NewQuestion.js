@@ -1,5 +1,5 @@
 // React Router Hooks
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // React hooks
 import React, { useState } from "react";
@@ -18,7 +18,8 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const NewQuestion = () => {
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf("/");
 
   const [title, setTitle] = useState("");
   const [question, setQuestion] = useState("");
@@ -52,7 +53,7 @@ const NewQuestion = () => {
 
     await AddQuestion(
       {
-        url: "/frontend/add_question",
+        url: `${pathname.slice(0 , lastIndex)}/add_question`,
         errorMessage: "Failed to create question",
         method: "POST",
         body: {
@@ -65,8 +66,7 @@ const NewQuestion = () => {
         },
       },
       (response) => {
-        console.log(response)
-        if (response) navigate("/frontend/all_questions");
+        if (response) navigate(`${pathname.slice(0 , lastIndex)}/all_questions`);
       }
     );
   };

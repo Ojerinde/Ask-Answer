@@ -38,12 +38,12 @@
       background-color: #3a93f2ea;
 
       &:hover {
-        border: 0.2rem solid rgb(10, 46, 136);
+        border: 0.2rem solid rgb(144, 251, 246);
         transition: all 0.3s ease-in-out;
       }
 
       &:hover .icons {
-        animation: bounce 2s infinite linear;
+        animation: bounce 2s infinite ease-in-out;
       }
 
       & .icons {
@@ -65,7 +65,7 @@
       }
 
       & a:hover {
-        color: rgb(10, 46, 136);
+        color: rgb(195, 204, 212);
         transform: scale(1.1);
       }
     }
@@ -94,9 +94,13 @@
 
 @keyframes bounce {
   0% {
-    transform: rotate(0deg) ;
+    transform: scale(1) ;
+  }
+  75% {
+    transform: scale(1.12) ;
+    fill-opacity: .6;
   }
   100% {
-    transform: rotate(360deg) ;
+    transform: scale(1) ;
   }
 }

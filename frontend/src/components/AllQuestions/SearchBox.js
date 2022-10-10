@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+
 import Card from "../../components/UI/Card/Card";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -7,6 +9,10 @@ import useFetch from "../../hooks/useFetch";
 import { useRef } from "react";
 
 const SearchBox = (props) => {
+
+  const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf("/");
+
   const { fetchRequest: searchQuestions } = useFetch();
 
   const titleRef = useRef();
@@ -22,7 +28,7 @@ const SearchBox = (props) => {
 
     searchQuestions(
       {
-        url: "/frontend/all_questions",
+        url: `${pathname.slice(0 , lastIndex)}/all_questions`,
         body: {
           title: title,
           offset: offset,

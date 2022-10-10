@@ -5,9 +5,12 @@ import Button from "../UI/Button/Button";
 import Card from "../UI/Card/Card";
 
 const Question = (props) => {
+  
   const { fetchRequest: moveQuestion } = useFetch();
 
   const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf("/");
+
   const navigate = useNavigate();
 
   const viewButtonHandler = (e) => {
@@ -19,7 +22,7 @@ const Question = (props) => {
   const moveToAnsweredPageHandler = () => {
     moveQuestion(
       {
-        url: `/frontend/all_questions/${props.id}`,
+        url: `${pathname.slice(0 , lastIndex)}/all_questions/${props.id}`,
         method: "PATCH",
         errorMessage: "Request failed",
       },

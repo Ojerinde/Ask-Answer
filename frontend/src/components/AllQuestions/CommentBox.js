@@ -41,7 +41,7 @@ const CommentBox = (props) => {
 
     AddComment(
       {
-        url: `http://localhost:5000/frontend/all_questions/${params.question_Id}/comments`,
+        url: `${props.pathname}`,
         method: "POST",
         body: { answer: inputState.answer, name: inputState.name },
         headers: {
@@ -57,18 +57,19 @@ const CommentBox = (props) => {
   const closeErrorHandler = () => {
     closeError();
   };
+   
   return (
-    <Card className="comment__card">
+    <Card className="comment__box">
       {!isLoading && error.hasError && (
         <Error message={error.message} onClick={closeErrorHandler} />
       )}
       <form onSubmit={addCommentHandler}>
         <textarea
           onChange={answerInputHandler}
-          className="comment__card--input"
+          className="comment__box--input"
           placeholder="Do well to explain in simple terms"
         ></textarea>
-        <div className="comment__card--btn">
+        <div className="comment__box--btn">
           <input
             onChange={nameInputHandler}
             type="text"

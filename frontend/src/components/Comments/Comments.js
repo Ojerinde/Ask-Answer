@@ -28,7 +28,7 @@ const Comments = (props) => {
     };
     getComments(
       {
-        url: `/frontend/answered_questions/comments/${props.id}`,
+        url: `${props.pathname}/comments/${props.id}`,
         errorMessage: "Could not fetch comments",
       },
       getCommentsFromRequest

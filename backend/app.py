@@ -4,7 +4,7 @@ from flask import Flask, request, abort, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
 
-from models import db, Question, Comment
+from models import db, FrontendQuestion, BackendQuestion, CloudQuestion, FrontendComment, BackendComment, CloudComment
 
 # Instantiate flask app
 app = Flask(__name__)
@@ -37,14 +37,13 @@ def type_check(query, bool_type):
         questions.append(ques.format())
     return questions
 
+
+###############################################################################################################
+################################################ FRONTEND #####################################################
 # Get all questios route
 @app.route('/frontend/all_questions')
 def get_questions():
-    query = Question.query.order_by(Question.id).all()
-
-    # Checking if there is or are questions
-    if len(query) == 0:
-        abort(404)
+    query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
 
     # Getting answered questions
     questions = type_check(query, False)
@@ -81,7 +80,7 @@ def create_question():
             abort(400)
 
         # Creating a new question
-        question = Question(title=title, description=question, images=images)
+        question = FrontendQuestion(title=title, description=question, images=images)
         question.insert()
 
     except:
@@ -94,7 +93,7 @@ def create_question():
 # Get a question details route
 @app.route('/frontend/all_questions/<int:question_id>')
 def get_question(question_id):
-    query = Question.query.get(question_id)
+    query = FrontendQuestion.query.get(question_id)
 
     try:
         if not query:
@@ -107,33 +106,11 @@ def get_question(question_id):
         abort(404)
 
 
-# Add comment
-@app.route('/frontend/all_questions/<int:question_id>/comments', methods=["POST"])
-def create_comment(question_id):
-    body = request.get_json()
-
-    name = body.get('name', None)
-    answer = body.get('answer', None)
-
-    try:
-        if not (name or answer):
-            abort(400)
-
-        comment = Comment(name=name, answer=answer, question_id=question_id)
-        comment.insert()
-
-    except:
-        abort(400)
-
-    return jsonify({
-        'success': True,
-    })
-
 # Answers question
 @app.route('/frontend/all_questions/<int:question_id>', methods=["PATCH"])
 def move_question_to_answered_page(question_id):
 
-    query = Question.query.get(question_id)
+    query = FrontendQuestion.query.get(question_id)
 
     try:
         if not query:
@@ -142,7 +119,7 @@ def move_question_to_answered_page(question_id):
         query.answered = True
         query.update()
 
-        new_query = Question.query.order_by(Question.id).all()
+        new_query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
 
         if len(new_query) == 0:
             abort(404)
@@ -162,12 +139,10 @@ def move_question_to_answered_page(question_id):
 # Get answered questions
 @app.route('/frontend/answered_questions')
 def get_answered_questions():
-    query = Question.query.order_by(Question.id).all()
+    query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
 
     try:
-        if not query:
-            abort(404)
-
+       
         questions = type_check(query, True)
 
         return jsonify({
@@ -180,7 +155,7 @@ def get_answered_questions():
 # Get answered question details
 @app.route('/frontend/answered_questions/<int:id>')
 def get_answered_question(id):
-    query = Question.query.get(id)
+    query = FrontendQuestion.query.get(id)
 
     try:
         if not query:
@@ -206,7 +181,7 @@ def filter_questions():
         if not (title or offset or limit):
             abort(400)
 
-        query = Question.query.filter(Question.title.ilike(f'%{title}%')).limit(limit).offset(offset).all()
+        query = FrontendQuestion.query.filter(FrontendQuestion.title.ilike(f'%{title}%')).limit(limit).offset(offset).all()
 
         questions = type_check(query, False)
         answered_questions = type_check(query, True)
@@ -224,7 +199,7 @@ def filter_questions():
 # Delete
 @app.route('/frontend/all_questions/<int:id>')
 def delete_question(id):
-    query = Question.query.get(id)
+    query = FrontendQuestion.query.get(id)
     print(query)
     try:
         if not query:
@@ -232,7 +207,456 @@ def delete_question(id):
         
         query.delete()
 
-        query = Question.query.order_by(Question.id).all()
+        query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
+
+        questions = type_check(query, False)
+        answered_questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(404)
+
+
+# Add comment
+@app.route('/frontend/all_questions/<int:question_id>/comments', methods=["POST"])
+def create_comment(question_id):
+    body = request.get_json()
+
+    name = body.get('name', None)
+    answer = body.get('answer', None)
+
+    try:
+        if not (name or answer):
+            abort(400)
+
+        comment = FrontendComment(name=name, answer=answer, question_id=question_id)
+        comment.insert()
+
+    except:
+        abort(400)
+
+    return jsonify({
+        'success': True,
+    })
+
+
+# Get a question comments 
+@app.route('/frontend/answered_questions/comments/<int:id>')
+def get_comments(id):
+    query = FrontendComment.query.filter_by(question_id=id).all()
+
+    # Checking if there is or are comments
+    if len(query) == 0:
+        abort(404)
+
+    # Getting answered questions
+    comments = [comment.format() for comment in query]
+
+    return jsonify({
+        'comments': comments,
+        'total_comments': len(comments),
+    })
+
+
+
+
+###############################################################################################################
+################################################ BACKEND ######################################################
+# Get all questios route
+@app.route('/backend/all_questions')
+def get_backend_questions():
+    query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+
+    # Getting answered questions
+    questions = type_check(query, False)
+
+    # Getting unanswered questions
+    answered_questions = type_check(query, True)
+
+    return jsonify({
+        'questions': questions,
+        'total_questions': len(questions),
+        "answered_questions": len(answered_questions)
+
+    })
+
+
+# Add a question route
+@app.route('/backend/add_question', methods=["POST"])
+def create_backend_question():
+    body = request.get_json()
+
+    # Getting request body
+    title = body.get('title', None)
+    question = body.get('question', None)
+    images_list = body.get('images', None)
+
+    # Run the following if only there is a list of image
+    images = ''
+    if images_list:
+        images = ",".join(images_list)
+
+    try:
+        # Checking if required fields are filled
+        if not (title or question):
+            abort(400)
+
+        # Creating a new question
+        question = BackendQuestion(title=title, description=question, images=images)
+        question.insert()
+
+    except:
+        abort(400)
+
+    return jsonify({
+        'success': True,
+    })
+
+# Get a question details route
+@app.route('/backend/all_questions/<int:question_id>')
+def get_backend_question(question_id):
+    query = BackendQuestion.query.get(question_id)
+
+    try:
+        if not query:
+            abort(404)
+
+        return jsonify({
+            'question': query.format(),
+        })
+    except:
+        abort(404)
+
+
+# Answers question
+@app.route('/backend/all_questions/<int:question_id>', methods=["PATCH"])
+def move_backend_question(question_id):
+
+    query = BackendQuestion.query.get(question_id)
+
+    try:
+        if not query:
+            abort(404)
+
+        query.answered = True
+        query.update()
+
+        new_query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+
+        if len(new_query) == 0:
+            abort(404)
+
+        questions = type_check(new_query, False)
+        answered_questions = type_check(new_query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(404)
+
+# Get answered questions
+@app.route('/backend/answered_questions')
+def get_backend_answered_questions():
+    query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+
+    try:
+        if not query:
+            abort(404)
+
+        questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+        })
+    except:
+        abort(404)
+
+# Get answered question details
+@app.route('/backend/answered_questions/<int:id>')
+def get_backend_answered_question(id):
+    query = BackendQuestion.query.get(id)
+
+    try:
+
+        return jsonify({
+            'question': query.format(),
+        })
+    except:
+        abort(404)
+
+
+# Filter question
+@app.route('/backend/all_questions', methods=["POST"])
+def filter_backend_questions():
+    body = request.get_json()
+
+    title = body.get('title', None)
+    offset = body.get('offset', None)
+    limit = body.get('limit', None)
+
+    try:
+        if not (title or offset or limit):
+            abort(400)
+
+        query = BackendQuestion.query.filter(BackendQuestion.title.ilike(f'%{title}%')).limit(limit).offset(offset).all()
+
+        questions = type_check(query, False)
+        answered_questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(400)
+
+
+# Delete
+@app.route('/backend/all_questions/<int:id>')
+def delete_backend_question(id):
+    query = BackendQuestion.query.get(id)
+    print(query)
+    try:
+        if not query:
+            abort(404)
+        
+        query.delete()
+
+        query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+
+        questions = type_check(query, False)
+        answered_questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(404)
+
+
+# Add comment
+@app.route('/backend/all_questions/<int:question_id>/comments', methods=["POST"])
+def create_backend_comment(question_id):
+    body = request.get_json()
+
+    name = body.get('name', None)
+    answer = body.get('answer', None)
+
+    try:
+        if not (name or answer):
+            abort(400)
+
+        comment = BackendComment(name=name, answer=answer, question_id=question_id)
+        comment.insert()
+
+    except:
+        abort(400)
+
+    return jsonify({
+        'success': True,
+    })
+
+
+# Get a question comments 
+@app.route('/backend/answered_questions/comments/<int:id>')
+def get_backend_comments(id):
+    query = BackendComment.query.filter_by(question_id=id).all()
+
+    # Checking if there is or are comments
+    if len(query) == 0:
+        abort(404)
+
+    # Getting answered questions
+    comments = [comment.format() for comment in query]
+
+    return jsonify({
+        'comments': comments,
+        'total_comments': len(comments),
+    })
+
+
+
+###############################################################################################################
+################################################ CLOUD ######################################################
+# Get all questios route
+@app.route('/cloud/all_questions')
+def get_cloud_questions():
+    query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+
+    # Getting answered questions
+    questions = type_check(query, False)
+
+    # Getting unanswered questions
+    answered_questions = type_check(query, True)
+
+    return jsonify({
+        'questions': questions,
+        'total_questions': len(questions),
+        "answered_questions": len(answered_questions)
+
+    })
+
+
+# Add a question route
+@app.route('/cloud/add_question', methods=["POST"])
+def create_cloud_question():
+    body = request.get_json()
+
+    # Getting request body
+    title = body.get('title', None)
+    question = body.get('question', None)
+    images_list = body.get('images', None)
+
+
+    try:
+        # Checking if required fields are filled
+        if not (title or question):
+            abort(400)
+
+        # Creating a new question
+        question = CloudQuestion(title=title, description=question, images=",".join(images_list))
+        question.insert()
+
+    except:
+        abort(400)
+
+    return jsonify({
+        'success': True,
+    })
+
+# Get a question details route
+@app.route('/cloud/all_questions/<int:question_id>')
+def get_cloud_question(question_id):
+    query = CloudQuestion.query.get(question_id)
+
+    try:
+        if not query:
+            abort(404)
+
+        return jsonify({
+            'question': query.format(),
+        })
+    except:
+        abort(404)
+
+
+# Answers question
+@app.route('/cloud/all_questions/<int:question_id>', methods=["PATCH"])
+def move_cloud_question(question_id):
+
+    query = CloudQuestion.query.get(question_id)
+
+    try:
+        if not query:
+            abort(404)
+
+        query.answered = True
+        query.update()
+
+        new_query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+
+        if len(new_query) == 0:
+            abort(404)
+
+        questions = type_check(new_query, False)
+        answered_questions = type_check(new_query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(404)
+
+# Get answered questions
+@app.route('/cloud/answered_questions')
+def get_cloud_answered_questions():
+    query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+
+    try:
+       
+        questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+        })
+    except:
+        abort(404)
+
+# Get answered question details
+@app.route('/cloud/answered_questions/<int:id>')
+def get_cloud_answered_question(id):
+    query = CloudQuestion.query.get(id)
+
+    try:
+        if not query:
+            abort(404)
+
+        return jsonify({
+            'question': query.format(),
+        })
+    except:
+        abort(404)
+
+
+# Filter question
+@app.route('/cloud/all_questions', methods=["POST"])
+def filter_cloud_questions():
+    body = request.get_json()
+
+    title = body.get('title', None)
+    offset = body.get('offset', None)
+    limit = body.get('limit', None)
+
+    try:
+        if not (title or offset or limit):
+            abort(400)
+
+        query = CloudQuestion.query.filter(CloudQuestion.title.ilike(f'%{title}%')).limit(limit).offset(offset).all()
+
+        questions = type_check(query, False)
+        answered_questions = type_check(query, True)
+
+        return jsonify({
+            'questions': questions,
+            'total_questions': len(questions),
+            "answered_questions": len(answered_questions)
+        })
+
+    except:
+        abort(400)
+
+
+# Delete
+@app.route('/cloud/all_questions/<int:id>')
+def delete_cloud_question(id):
+    query = CloudQuestion.query.get(id)
+    print(query)
+    try:
+        if not query:
+            abort(404)
+        
+        query.delete()
+
+        query = CloudQuestion.query.order_by(CloudQuestion.id).all()
 
         questions = type_check(query, False)
         answered_questions = type_check(query, True)
@@ -248,10 +672,33 @@ def delete_question(id):
 
 
 
+# Add comment
+@app.route('/cloud/all_questions/<int:question_id>/comments', methods=["POST"])
+def create_cloud_comment(question_id):
+    body = request.get_json()
+
+    name = body.get('name', None)
+    answer = body.get('answer', None)
+
+    try:
+        if not (name or answer):
+            abort(400)
+
+        comment = CloudComment(name=name, answer=answer, question_id=question_id)
+        comment.insert()
+
+    except:
+        abort(400)
+
+    return jsonify({
+        'success': True,
+    })
+
+
 # Get a question comments 
-@app.route('/frontend/answered_questions/comments/<int:id>')
-def get_comments(id):
-    query = Comment.query.filter_by(question_id=id).all()
+@app.route('/cloud/answered_questions/comments/<int:id>')
+def get_cloud_comments(id):
+    query = CloudComment.query.filter_by(question_id=id).all()
 
     # Checking if there is or are comments
     if len(query) == 0:
@@ -264,6 +711,7 @@ def get_comments(id):
         'comments': comments,
         'total_comments': len(comments),
     })
+
 
 
 @app.errorhandler(404)
