@@ -13,7 +13,7 @@ const AnsweredQuestions = () => {
   const { pathname } = useLocation();
   const lastIndex = pathname.lastIndexOf("/");
 
-  const [answeredQuestions, setAnsweredQuestion] = useState({
+  const [answered_questions, setAnsweredQuestion] = useState({
     questions: [],
     totalQuestions: 0,
   });
@@ -35,12 +35,12 @@ const AnsweredQuestions = () => {
 
     getAnsweredQuestions(
       {
-        url: `${pathname.slice(0 , lastIndex)}/answered_questions`,
+        url: `${pathname}`,
         errorMessage: "Could not fetch questions",
       },
       getData
     );
-  }, [getAnsweredQuestions, pathname, lastIndex]);
+  }, [getAnsweredQuestions, pathname]);
 
   const closeErrorHandler = () => {
     closeError();
@@ -56,13 +56,13 @@ const AnsweredQuestions = () => {
         <Error message={error.message} onClick={closeErrorHandler} />
       )}
 
-      {answeredQuestions.totalQuestions === 0 ? (
+      {answered_questions.totalQuestions === 0 ? (
         <div className="no__question">No question(s) has been answered.</div>
       ) : (
         <Routes>
           <Route
             path=""
-            element={answeredQuestions.questions.map((data) => (
+            element={answered_questions.questions?.map((data) => (
               <AnsweredQuestion
                 key={data.id}
                 id={data.id}
@@ -71,12 +71,7 @@ const AnsweredQuestions = () => {
               />
             ))}
           />
-          <Route
-            path=":Id"
-            element={
-              <AnsweredQuestionDetail pathname={pathname.slice(0, lastIndex)} />
-            }
-          />
+          <Route path=":Id" element={<AnsweredQuestionDetail />} />
         </Routes>
       )}
     </>

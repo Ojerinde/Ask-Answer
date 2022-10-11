@@ -38,7 +38,7 @@ class FrontendQuestion(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'images': self.images.split(','),
+            'images': [] if len(self.images) == 0 else self.images.split(','),
         }
 
 class FrontendComment(db.Model):
@@ -111,7 +111,7 @@ class BackendQuestion(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'images': self.images.split(','),
+            'images': [] if len(self.images) == 0 else self.images.split(','),
         }
 
 class BackendComment(db.Model):
@@ -184,7 +184,7 @@ class CloudQuestion(db.Model):
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'images': self.images.split(','),
+            'images': [] if len(self.images) == 0 else self.images.split(','),
         }
 
 class CloudComment(db.Model):

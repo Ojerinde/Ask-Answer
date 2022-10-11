@@ -12,8 +12,6 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Error from "../UI/Error/Error";
 
 const QuestionDetail = (props) => {
-  const { pathname: parentPath } = props;
-  
   const [question, setQuestion] = useState({});
   const [clicked, setClicked] = useState(false);
 
@@ -21,6 +19,7 @@ const QuestionDetail = (props) => {
 
   const { question_Id } = useParams();
   const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf("/");
 
   // const [params, setSearchParams] = useSearchParams()
   // console.log(params.get('page'))
@@ -40,7 +39,7 @@ const QuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `${parentPath}/${question_Id}`,
+        url: `${pathname}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
@@ -48,7 +47,7 @@ const QuestionDetail = (props) => {
   }, [question_Id, getQuestion]);
 
   const goBackHandler = () => {
-    navigate(`${props.pathname}`);
+    navigate(`${pathname.slice(0, lastIndex)}`);
   };
 
   const answerHandler = () => {
@@ -71,7 +70,7 @@ const QuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `/frontend/all_questions/${question_Id}`,
+        url: `${pathname}`,
         method: "DELETE",
         errorMessage: "Question does not exist",
       },
@@ -80,10 +79,9 @@ const QuestionDetail = (props) => {
     );
 
     if (!isLoading && !error.hasError) {
-      navigate(`/frontend/all_questions`);
+      navigate(`${pathname.slice(0, lastIndex)}`);
     }
   };
-  console.log(question);
 
   return (
     <>

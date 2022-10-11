@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Button from "../UI/Button/Button";
@@ -9,12 +9,15 @@ import useFetch from "../../hooks/useFetch";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Error from "../UI/Error/Error";
 
-const AnsweredQuestionDetail = (props) => {
+const AnsweredQuestionDetail = () => {
   const [question, setQuestion] = useState({});
 
   const navigate = useNavigate();
   const { Id } = useParams();
-  const { pathname } = props;
+
+  const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf('/')
+
 
   const {
     isLoading,
@@ -30,15 +33,15 @@ const AnsweredQuestionDetail = (props) => {
 
     getQuestion(
       {
-        url: `${pathname}/${Id}`,
+        url: `${pathname}`,
         errorMessage: "Question does not exist",
       },
       getQuestionFromRequest
     );
-  }, [Id, getQuestion, pathname]);
+  }, [getQuestion, pathname]);
 
   const goBackHandler = () => {
-    navigate(`${props.pathname}`);
+    navigate(`${pathname.slice(0, lastIndex)}`);
   };
 
   if (isLoading) return <LoadingSpinner />;

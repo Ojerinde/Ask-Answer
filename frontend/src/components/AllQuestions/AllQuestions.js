@@ -15,10 +15,7 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 const QUESTION_PER_PAGE = 2;
 
 const AllQuestion = (props) => {
-  const { pathname } = useLocation();
-  const lastIndex = pathname.lastIndexOf("/");
-
-  
+  const { pathname } = useLocation();  
 
   const [start, setStart] = useState(0);
 
@@ -69,13 +66,13 @@ const AllQuestion = (props) => {
     };
     getQuestions(
       {
-        url: `${pathname.slice(0 , lastIndex)}/all_questions`,
+        url: `${pathname}`,
         errorMessage: "Could not fetch questions",
       },
       // The data will be passed to this function and then we can setAllquestion. Calling allQuestions here will cause infinte loop.
       getQuestionsFromRequest
     );
-  }, [getQuestions,pathname, lastIndex]);
+  }, [getQuestions,pathname]);
 
   const closeErrorHandler = () => {
     // A function to close the error. coming from useFetch
@@ -137,11 +134,11 @@ const AllQuestion = (props) => {
           element={
             <QuestionDetail
               onDelete={onDeleteHandler}
-              pathname={pathname.slice(0, lastIndex)}
+              
             />
           }
         >
-          <Route path="comments" element={<CommentBox pathname={pathname}/>} />
+          <Route path="comments" element={<CommentBox />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>

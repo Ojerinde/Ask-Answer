@@ -16,6 +16,7 @@ const CommentBox = (props) => {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
+
   const lastIndex = pathname.lastIndexOf("/");
 
   const answerInputHandler = (e) => {
@@ -41,7 +42,7 @@ const CommentBox = (props) => {
 
     AddComment(
       {
-        url: `${props.pathname}`,
+        url: `${pathname}`,
         method: "POST",
         body: { answer: inputState.answer, name: inputState.name },
         headers: {

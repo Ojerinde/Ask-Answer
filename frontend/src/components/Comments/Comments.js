@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import useFetch from "../../hooks/useFetch";
 import Error from "../UI/Error/Error";
@@ -12,6 +13,9 @@ const Comments = (props) => {
     total_comments: 0,
   });
 
+  const { pathname } = useLocation();
+  const lastIndex = pathname.lastIndexOf("/");
+  
   const {
     isLoading,
     error,
@@ -26,13 +30,17 @@ const Comments = (props) => {
         total_comments: data.total_comments,
       });
     };
-    getComments(
-      {
-        url: `${props.pathname}/comments/${props.id}`,
-        errorMessage: "Could not fetch comments",
-      },
-      getCommentsFromRequest
-    );
+    if (props.pathname) {
+      getComments(
+        {
+          url: `${pathname.slice(0, lastIndex)}/comments/${pathname.slice(
+            lastIndex + 1
+          )}`,
+          errorMessage: "Could not fetch comments",
+        },
+        getCommentsFromRequest
+      );
+    } else return;
   }, [getComments, props.id]);
 
   if (isLoading) return <LoadingSpinner />;

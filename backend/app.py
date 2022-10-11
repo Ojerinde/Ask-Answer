@@ -197,7 +197,7 @@ def filter_questions():
 
 
 # Delete
-@app.route('/frontend/all_questions/<int:id>')
+@app.route('/frontend/all_questions/<int:id>',methods=["DELETE"])
 def delete_question(id):
     query = FrontendQuestion.query.get(id)
     print(query)
@@ -424,7 +424,7 @@ def filter_backend_questions():
 
 
 # Delete
-@app.route('/backend/all_questions/<int:id>')
+@app.route('/backend/all_questions/<int:id>', methods=["DELETE"])
 def delete_backend_question(id):
     query = BackendQuestion.query.get(id)
     print(query)
@@ -521,8 +521,7 @@ def create_cloud_question():
     title = body.get('title', None)
     question = body.get('question', None)
     images_list = body.get('images', None)
-
-
+   
     try:
         # Checking if required fields are filled
         if not (title or question):
@@ -646,10 +645,9 @@ def filter_cloud_questions():
 
 
 # Delete
-@app.route('/cloud/all_questions/<int:id>')
+@app.route('/cloud/all_questions/<int:id>', methods=["DELETE"])
 def delete_cloud_question(id):
     query = CloudQuestion.query.get(id)
-    print(query)
     try:
         if not query:
             abort(404)

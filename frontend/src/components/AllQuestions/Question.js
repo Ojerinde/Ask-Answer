@@ -9,7 +9,6 @@ const Question = (props) => {
   const { fetchRequest: moveQuestion } = useFetch();
 
   const { pathname } = useLocation();
-  const lastIndex = pathname.lastIndexOf("/");
 
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ const Question = (props) => {
   const moveToAnsweredPageHandler = () => {
     moveQuestion(
       {
-        url: `${pathname.slice(0 , lastIndex)}/all_questions/${props.id}`,
+        url: `${pathname}/all_questions/${props.id}`,
         method: "PATCH",
         errorMessage: "Request failed",
       },
