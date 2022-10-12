@@ -25,7 +25,6 @@ const NewQuestion = () => {
   const [question, setQuestion] = useState("");
   const [images, setImages] = useState([]);
 
-
   const {
     isLoading,
     error,
@@ -53,7 +52,7 @@ const NewQuestion = () => {
 
     await AddQuestion(
       {
-        url: `${pathname.slice(0 , lastIndex)}/add_question`,
+        url: `${pathname.slice(0, lastIndex)}/add_question`,
         errorMessage: "Failed to create question",
         method: "POST",
         body: {
@@ -66,7 +65,7 @@ const NewQuestion = () => {
         },
       },
       (response) => {
-        if (response) navigate(`${pathname.slice(0 , lastIndex)}/all_questions`);
+        if (response) navigate(`${pathname.slice(0, lastIndex)}/all_questions`);
       }
     );
   };
@@ -78,7 +77,6 @@ const NewQuestion = () => {
   const closeErrorHandler = () => {
     closeError();
   };
- 
 
   return (
     <>

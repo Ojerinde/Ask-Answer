@@ -1,0 +1,39 @@
+.search__icon--box {
+  display: grid;
+  place-items: center;
+  row-gap: 1rem;
+  margin: 2rem 0;
+}
+
+.search__icon {
+  width: 4rem;
+  height: 4rem;
+  fill: $primary-color;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    fill: $primary-dark-color;
+  }
+}
+
+.search__icon {
+  &--paragraph-on,
+  &--paragraph-off {
+    font-size: 1.6rem;
+    word-spacing: 0.1rem;
+  }
+  &--paragraph-on {
+    color: rgba(95, 158, 154, 0.8);
+  }
+  &--paragraph-off {
+    color: rgba(10, 89, 108, 0.8);
+  }
+}
+
+.no__question--added {
+    font-size: 1.8rem;
+    margin: 2rem 0;
+    text-align: center;
+    color: $primary-color;
+}

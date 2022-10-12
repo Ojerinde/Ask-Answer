@@ -8,6 +8,7 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Comment from "./Comment";
 
 const Comments = (props) => {
+  console.log(props);
   const [allComments, setAllComments] = useState({
     comments: [],
     total_comments: 0,
@@ -15,7 +16,7 @@ const Comments = (props) => {
 
   const { pathname } = useLocation();
   const lastIndex = pathname.lastIndexOf("/");
-  
+
   const {
     isLoading,
     error,
@@ -30,18 +31,16 @@ const Comments = (props) => {
         total_comments: data.total_comments,
       });
     };
-    if (props.pathname) {
-      getComments(
-        {
-          url: `${pathname.slice(0, lastIndex)}/comments/${pathname.slice(
-            lastIndex + 1
-          )}`,
-          errorMessage: "Could not fetch comments",
-        },
-        getCommentsFromRequest
-      );
-    } else return;
-  }, [getComments, props.id]);
+
+    getComments(
+      {
+        url: `${pathname.slice(0, lastIndex)}/comments/${props.id}
+          `,
+        errorMessage: "Could not fetch comments",
+      },
+      getCommentsFromRequest
+    );
+  }, [getComments]);
 
   if (isLoading) return <LoadingSpinner />;
 

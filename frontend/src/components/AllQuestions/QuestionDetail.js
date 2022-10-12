@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,6 @@ const QuestionDetail = (props) => {
 
   const navigate = useNavigate();
 
-  const { question_Id } = useParams();
   const { pathname } = useLocation();
   const lastIndex = pathname.lastIndexOf("/");
 
@@ -44,7 +43,7 @@ const QuestionDetail = (props) => {
       },
       getQuestionFromRequest
     );
-  }, [question_Id, getQuestion]);
+  }, []);
 
   const goBackHandler = () => {
     navigate(`${pathname.slice(0, lastIndex)}`);

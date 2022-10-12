@@ -21,7 +21,7 @@ const Question = (props) => {
   const moveToAnsweredPageHandler = () => {
     moveQuestion(
       {
-        url: `${pathname}/all_questions/${props.id}`,
+        url: `${pathname}/${props.id}`,
         method: "PATCH",
         errorMessage: "Request failed",
       },

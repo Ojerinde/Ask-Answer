@@ -11,13 +11,13 @@ import Error from "../UI/Error/Error";
 
 const AnsweredQuestionDetail = () => {
   const [question, setQuestion] = useState({});
+  const [comment, setComment] = useState(false);
 
   const navigate = useNavigate();
-  const { Id } = useParams();
 
   const { pathname } = useLocation();
-  const lastIndex = pathname.lastIndexOf('/')
-
+  const lastIndex = pathname.lastIndexOf("/");
+  const { Id } = useParams();
 
   const {
     isLoading,
@@ -38,7 +38,7 @@ const AnsweredQuestionDetail = () => {
       },
       getQuestionFromRequest
     );
-  }, [getQuestion, pathname]);
+  }, []);
 
   const goBackHandler = () => {
     navigate(`${pathname.slice(0, lastIndex)}`);
@@ -66,9 +66,11 @@ const AnsweredQuestionDetail = () => {
             <img key={index} src={`${image}`} alt={`Snapshot ${index}`} />
           )) || "No image"}
         </figure>
-        {/* All comments here: They shuold be paginated */}
+        <Button onClick={() => setComment((prev) => !prev)}>
+          See all answers
+        </Button>
       </Card>
-      <Comments id={Id} />
+      {comment ? <Comments id = {Id}/> : ""}
     </>
   );
 };

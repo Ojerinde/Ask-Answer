@@ -47,7 +47,6 @@ The prerequites tools for local development are:
  - Postgres
  
 
-
 ### Backend
 It is a good practice to keep your app dependencies isolated by working a virtual environment.
 
@@ -89,13 +88,13 @@ The application is run on `http://127.0.0.1:5000/` by default and is a proxy in 
 
 ### Set up the Database
 
-With Postgres running, in the app directory,
+With Postgres running, create a database using the command below,
 
 ```
 createbd altschool
 ```
 
-Create the database table by running
+Create the database tables by running
 
 ```
 flask db init # Initialize flask migrate script
@@ -160,19 +159,181 @@ This application is not deployed and can only be run locally. The backend applic
 ### Endpoints
 
 #### Method: GET
-#### Endpoint: /frontend/all_questions
+#### Endpoint: /<track>/all_questions
 * General:
-    * This endpoint fetches a dictionary of categories
-    * Fetched results is an object with  `questions`, `total_questions`, and `answered_questions`.
+    * This endpoint fetches all unanswered questions question
+    * Fetched results is an object with  `questions`, `total_questions`, and `answered_questions` keys.
     * Request argument: None 
 * Sample:
-    * Without argument: `curl http://127.0.0.1:5000/frontend/all_questions`
+    * Without argument: `curl http://127.0.0.1:5000/<track>/all_questions`
 * Response: Json
 ```
 {
-    "answered_questions": 0,
-    "questions": [],
-    "total_questions": 0
+    "answered_questions": 1,
+    "questions": [
+        {
+            "description": "How do I select an Html element",
+            "id": 3,
+            "images": [],
+            "title": "Js"
+        },
+        {
+            "description": "What is the selector for class",
+            "id": 2,
+            "images": [],
+            "title": "Css"
+        },
+        {
+            "description": "is <a> an inline or block element.",
+            "id": 1,
+            "images": [],
+            "title": "Html"
+        }
+    ],
+    "total_questions": 3
+}
+```
+
+### Endpoints
+
+#### Method: POST
+#### Endpoint: /<track>/add_questions
+* General:
+    * This endpoint create a question
+    * Fetched results is an object with  `questions`, `total_questions`, and `answered_questions` keys.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/add_question -H "Content-Type: application/json" -d '{"title": "Invalid commands", "question": "I am having an error when I run npm run"}'`
+
+* Request: Json
+```
+{
+    "title": "Invalid commands",
+    "question": "I am having an error when I run npm run",
+    "images": [] # This is optional
+}
+```
+
+* Response: Json
+```
+{
+    "success": true
+}
+```
+
+
+### Endpoints
+
+#### Method: GET
+#### Endpoint: /<track>/all_questions/{question_id}
+* General:
+    * This endpoint fetches an unanswered question based on the given question id
+    * Fetched results is an object with  `question` key.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/all_questions/1`
+* Response: Json
+```
+{
+    "question": {
+        "description": "is <a> an inline or block element.",
+        "id": 1,
+        "images": [],
+        "title": "Html"
+    }
+}
+```
+
+
+### Endpoints
+
+#### Method: PATCH
+#### Endpoint: /<track>/all_questions/{question_id}
+* General:
+    * This endpoint modified the answered column of a question from false to true i.e., a question has been answered 
+    * Fetched results is an object with  `questions`, `total_questions`, and `answered_questions` keys.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/all_questions/1`
+* Response: Json
+```
+{
+    "answered_questions": 2,
+    "questions": [
+        {
+            "description": "I am having an error when I run npm run",
+            "id": 5,
+            "images": [],
+            "title": "Invalid commands"
+        },
+        {
+            "description": "How do I select an Html element",
+            "id": 3,
+            "images": [],
+            "title": "Js"
+        },
+        {
+            "description": "What is the selector for class",
+            "id": 2,
+            "images": [],
+            "title": "Css"
+        }
+    ],
+    "total_questions": 3
+}
+```
+
+### Endpoints
+
+#### Method: GET
+#### Endpoint: /<track>/answered_questions
+* General:
+    * This endpoint fetches all the answered questions 
+    * Fetched results is an object with  `questions`, and `total_questions` keys.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/answered_questions`
+* Response: Json
+```
+{
+    "questions": [
+        {
+            "description": "How do I start a React app",
+            "id": 4,
+            "images": [],
+            "title": "React"
+        },
+        {
+            "description": "is <a> an inline or block element.",
+            "id": 1,
+            "images": [],
+            "title": "Html"
+        }
+    ],
+    "total_questions": 2
+}
+```
+
+
+### Endpoints
+
+#### Method: GET
+#### Endpoint: /<track>/answered_questions/{question_id}
+* General:
+    * This endpoint fetches an answered question based on the given id
+    * Fetched results is an object with  `question` key.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/answered_questions/1`
+* Response: Json
+```
+{
+    "question": {
+        "description": "is <a> an inline or block element.",
+        "id": 1,
+        "images": [],
+        "title": "Html"
+    }
 }
 ```
 

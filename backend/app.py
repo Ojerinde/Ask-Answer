@@ -43,7 +43,7 @@ def type_check(query, bool_type):
 # Get all questios route
 @app.route('/frontend/all_questions')
 def get_questions():
-    query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
+    query = FrontendQuestion.query.order_by(FrontendQuestion.id.desc()).all()
 
     # Getting answered questions
     questions = type_check(query, False)
@@ -119,7 +119,7 @@ def move_question_to_answered_page(question_id):
         query.answered = True
         query.update()
 
-        new_query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
+        new_query = FrontendQuestion.query.order_by(FrontendQuestion.id.desc()).all()
 
         if len(new_query) == 0:
             abort(404)
@@ -139,7 +139,7 @@ def move_question_to_answered_page(question_id):
 # Get answered questions
 @app.route('/frontend/answered_questions')
 def get_answered_questions():
-    query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
+    query = FrontendQuestion.query.order_by(FrontendQuestion.id.desc()).all()
 
     try:
        
@@ -207,7 +207,7 @@ def delete_question(id):
         
         query.delete()
 
-        query = FrontendQuestion.query.order_by(FrontendQuestion.id).all()
+        query = FrontendQuestion.query.order_by(FrontendQuestion.id.desc()).all()
 
         questions = type_check(query, False)
         answered_questions = type_check(query, True)
@@ -249,10 +249,7 @@ def create_comment(question_id):
 @app.route('/frontend/answered_questions/comments/<int:id>')
 def get_comments(id):
     query = FrontendComment.query.filter_by(question_id=id).all()
-
-    # Checking if there is or are comments
-    if len(query) == 0:
-        abort(404)
+    print(query)
 
     # Getting answered questions
     comments = [comment.format() for comment in query]
@@ -270,7 +267,7 @@ def get_comments(id):
 # Get all questios route
 @app.route('/backend/all_questions')
 def get_backend_questions():
-    query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+    query = BackendQuestion.query.order_by(BackendQuestion.id.desc()).all()
 
     # Getting answered questions
     questions = type_check(query, False)
@@ -346,7 +343,7 @@ def move_backend_question(question_id):
         query.answered = True
         query.update()
 
-        new_query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+        new_query = BackendQuestion.query.order_by(BackendQuestion.id.desc()).all()
 
         if len(new_query) == 0:
             abort(404)
@@ -366,7 +363,7 @@ def move_backend_question(question_id):
 # Get answered questions
 @app.route('/backend/answered_questions')
 def get_backend_answered_questions():
-    query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+    query = BackendQuestion.query.order_by(BackendQuestion.id.desc()).all()
 
     try:
         if not query:
@@ -434,7 +431,7 @@ def delete_backend_question(id):
         
         query.delete()
 
-        query = BackendQuestion.query.order_by(BackendQuestion.id).all()
+        query = BackendQuestion.query.order_by(BackendQuestion.id.desc()).all()
 
         questions = type_check(query, False)
         answered_questions = type_check(query, True)
@@ -477,10 +474,6 @@ def create_backend_comment(question_id):
 def get_backend_comments(id):
     query = BackendComment.query.filter_by(question_id=id).all()
 
-    # Checking if there is or are comments
-    if len(query) == 0:
-        abort(404)
-
     # Getting answered questions
     comments = [comment.format() for comment in query]
 
@@ -496,7 +489,7 @@ def get_backend_comments(id):
 # Get all questios route
 @app.route('/cloud/all_questions')
 def get_cloud_questions():
-    query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+    query = CloudQuestion.query.order_by(CloudQuestion.id.desc()).all()
 
     # Getting answered questions
     questions = type_check(query, False)
@@ -567,7 +560,7 @@ def move_cloud_question(question_id):
         query.answered = True
         query.update()
 
-        new_query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+        new_query = CloudQuestion.query.order_by(CloudQuestion.id.desc()).all()
 
         if len(new_query) == 0:
             abort(404)
@@ -587,7 +580,7 @@ def move_cloud_question(question_id):
 # Get answered questions
 @app.route('/cloud/answered_questions')
 def get_cloud_answered_questions():
-    query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+    query = CloudQuestion.query.order_by(CloudQuestion.id.desc()).all()
 
     try:
        
@@ -654,7 +647,7 @@ def delete_cloud_question(id):
         
         query.delete()
 
-        query = CloudQuestion.query.order_by(CloudQuestion.id).all()
+        query = CloudQuestion.query.order_by(CloudQuestion.id.desc()).all()
 
         questions = type_check(query, False)
         answered_questions = type_check(query, True)
@@ -697,10 +690,6 @@ def create_cloud_comment(question_id):
 @app.route('/cloud/answered_questions/comments/<int:id>')
 def get_cloud_comments(id):
     query = CloudComment.query.filter_by(question_id=id).all()
-
-    # Checking if there is or are comments
-    if len(query) == 0:
-        abort(404)
 
     # Getting answered questions
     comments = [comment.format() for comment in query]

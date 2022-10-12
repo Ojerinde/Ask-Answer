@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
+import { HiOutlineSearchCircle } from "react-icons/hi";
+
 import SearchBox from "./SearchBox";
 import Question from "./Question";
 import QuestionDetail from "./QuestionDetail";
@@ -15,7 +17,8 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 const QUESTION_PER_PAGE = 2;
 
 const AllQuestion = (props) => {
-  const { pathname } = useLocation();  
+  const [search, SetSearch] = useState(false);
+  const { pathname } = useLocation();
 
   const [start, setStart] = useState(0);
 
@@ -72,7 +75,7 @@ const AllQuestion = (props) => {
       // The data will be passed to this function and then we can setAllquestion. Calling allQuestions here will cause infinte loop.
       getQuestionsFromRequest
     );
-  }, [getQuestions,pathname]);
+  }, []);
 
   const closeErrorHandler = () => {
     // A function to close the error. coming from useFetch
@@ -98,14 +101,37 @@ const AllQuestion = (props) => {
               {!isLoading && error.hasError && (
                 <Error message={error.message} onClick={closeErrorHandler} />
               )}
-              <SearchBox
-                totalQuestions={allQuestions.total_questions}
-                answeredQuestions={allQuestions.answered_questions}
-                onSearch={onDeleteHandler}
-              />
+              {allQuestions.questions?.length > 0 ? (
+                <div className="search__icon--box">
+                  <HiOutlineSearchCircle
+                    onClick={() => SetSearch((prev) => !prev)}
+                    className="search__icon"
+                  />
+                  {search === false ? (
+                    <p className="search__icon--paragraph-on">
+                      Click on the search icon for search form
+                    </p>
+                  ) : (
+                    <p className="search__icon--paragraph-off">
+                      Click on the search icon to close form
+                    </p>
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
+              {search === true ? (
+                <SearchBox
+                  totalQuestions={allQuestions.total_questions}
+                  answeredQuestions={allQuestions.answered_questions}
+                  onSearch={onDeleteHandler}
+                />
+              ) : (
+                ""
+              )}
               {isLoading ? (
                 <LoadingSpinner />
-              ) : allQuestions.questions ? (
+              ) : allQuestions.questions?.length > 0 ? (
                 allQuestions.questions
                   .slice(start, end)
                   .map((data) => (
@@ -118,7 +144,7 @@ const AllQuestion = (props) => {
                     />
                   ))
               ) : (
-                <p>No question to display</p>
+                <p className="no__question--added">No question added yet.</p>
               )}
               <Pagination
                 allQuestions={allQuestions.questions}
@@ -131,12 +157,7 @@ const AllQuestion = (props) => {
         />
         <Route
           path=":question_Id"
-          element={
-            <QuestionDetail
-              onDelete={onDeleteHandler}
-              
-            />
-          }
+          element={<QuestionDetail onDelete={onDeleteHandler} />}
         >
           <Route path="comments" element={<CommentBox />} />
         </Route>

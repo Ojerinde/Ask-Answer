@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect,  useState } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -11,7 +11,6 @@ import AnsweredQuestionDetail from "./AnsweredQuestionDetail";
 
 const AnsweredQuestions = () => {
   const { pathname } = useLocation();
-  const lastIndex = pathname.lastIndexOf("/");
 
   const [answered_questions, setAnsweredQuestion] = useState({
     questions: [],
