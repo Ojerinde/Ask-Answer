@@ -246,10 +246,9 @@ def create_comment(question_id):
 
 
 # Get a question comments 
-@app.route('/frontend/answered_questions/comments/<int:id>')
+@app.route('/frontend/answered_questions/<int:id>/comments')
 def get_comments(id):
     query = FrontendComment.query.filter_by(question_id=id).all()
-    print(query)
 
     # Getting answered questions
     comments = [comment.format() for comment in query]

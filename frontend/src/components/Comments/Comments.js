@@ -34,7 +34,7 @@ const Comments = (props) => {
 
     getComments(
       {
-        url: `${pathname.slice(0, lastIndex)}/comments/${props.id}
+        url: `${pathname.slice(0, lastIndex)}/${props.id}/comments
           `,
         errorMessage: "Could not fetch comments",
       },

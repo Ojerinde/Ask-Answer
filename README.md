@@ -337,20 +337,135 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
+### Endpoints
+
+#### Method: POST
+#### Endpoint: /<track>/all_questions
+* General:
+    * This endpoint filter questions based on the given title and it is case insensitive.
+    * Fetched results is an object with  `questions`, `total_questions`, and `answered_questions` keys.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/all_question -H "Content-Type: application/json" -d '{"title": "Invalid commands", "offset": 0, "limit: 3}'`
+
+* Request: Json
+```
+{
+    "title": "Invalid",
+    "offset": 0,
+    "limit": 3
+}
+```
+
+* Response: Json
+```
+{
+    "answered_questions": 0,
+    "questions": [
+        {
+            "description": "I am having an error when I run npm run",
+            "id": 5,
+            "images": [],
+            "title": "Invalid commands"
+        }
+    ],
+    "total_questions": 1
+}
+```
 
 #### Method: DELETE
-#### Endpoint: /frontend/all_questions/{question_id}'
+#### Endpoint: /<track>/all_questions/{question_id}'
 * General:
     * This endpoint deletes a question of the given question_id if it exists
     * Returned results is an object with with  `questions`, `total_questions`, and `answered_questions`.
     
 * Sample:
-    * Without argument: `curl -X DELETE http://127.0.0.1:5000//frontend/all_questions/1`
-    * Response: json
+    * Without argument: `curl -X DELETE http://127.0.0.1:5000/frontend/all_questions/1`
+
+* Response: json
 ```
 {
-    "answered_questions": 0,
-    "questions": [],
-    "total_questions": 0
+    "answered_questions": 1,
+    "questions": [
+        {
+            "description": "I am having an error when I run npm run",
+            "id": 5,
+            "images": [],
+            "title": "Invalid commands"
+        },
+        {
+            "description": "How do I select an Html element",
+            "id": 3,
+            "images": [],
+            "title": "Js"
+        },
+        {
+            "description": "What is the selector for class",
+            "id": 2,
+            "images": [],
+            "title": "Css"
+        }
+    ],
+    "total_questions": 3
 }
 ```
+
+### Endpoints
+
+#### Method: POST
+#### Endpoint: /<track>/all_questions/{question_id}/comments
+* General:
+    * This endpoint create comment for a given question
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/all_question/2/comments -H "Content-Type: application/json" -d '{"name": "Joel", "answer": "The selector for class is '.' without the quote"}'`
+
+* Request: Json
+```
+{
+    "name": "Joel",
+    "answer": "The selector for class is '.' without the quote"
+}
+```
+
+* Response: Json
+```
+{
+    "success": true
+}
+```
+
+### Endpoints
+
+#### Method: GET
+#### Endpoint: /<track>/answered_questions/{question_id}/comments
+* General:
+    * This endpoint fetches all comments of a given id.
+    * Fetched results is an object with  `comments` and `total_comments` keys.
+    * Request argument: None 
+* Sample:
+    * Without argument: `curl http://127.0.0.1:5000/<track>/answered_questions/2/comments`
+* Response: Json
+```
+{
+    "comments": [
+        {
+            "answer": "The selector for class is '.' without the quote",
+            "date": "Thu, 13 Oct 2022 13:30:03 GMT",
+            "id": 4,
+            "name": "Joel",
+            "question_id": 2
+        }
+    ],
+    "total_comments": 1
+}
+```
+
+## Deployment
+The app is not deployed
+
+## Author
+Joel Ojerinde
+
+## Acknowledgements 
+Udacity and AltSchool Africa
