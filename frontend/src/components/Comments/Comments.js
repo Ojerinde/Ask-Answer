@@ -8,7 +8,6 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Comment from "./Comment";
 
 const Comments = (props) => {
-  console.log(props);
   const [allComments, setAllComments] = useState({
     comments: [],
     total_comments: 0,

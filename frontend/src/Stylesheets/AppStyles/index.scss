@@ -9,7 +9,7 @@
 }
 
 html {
-  font-family: 62.5%;
+  font-size: 80%;
 }
 
 body {
@@ -18,4 +18,20 @@ body {
   font-weight: 300;
 }
 
+@media only screen and (max-width: $bp--large) {
+  html {
+    font-size: 70%;
+  }
+}
 
+@media only screen and (max-width: $bp--medium) {
+  html {
+    font-size: 65%;
+  }
+}
+
+@media only screen and (max-width: $bp--small) {
+  html {
+    font-size: 60%;
+  }
+}

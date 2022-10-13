@@ -39,7 +39,7 @@ const AnsweredQuestions = () => {
       },
       getData
     );
-  }, [getAnsweredQuestions, pathname]);
+  }, []);
 
   const closeErrorHandler = () => {
     closeError();

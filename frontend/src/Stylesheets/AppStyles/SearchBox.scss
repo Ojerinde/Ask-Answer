@@ -24,15 +24,27 @@
       letter-spacing: 0.06rem;
       font-weight: 400;
       color: #10454c;
-    
 
       & span {
         font-size: 1rem;
         letter-spacing: 0.07rem;
         font-weight: 500;
         color: #0c3034;
-        margin-left: .3rem;
+        margin-left: 0.3rem;
       }
     }
   }
 }
+
+@media only screen and (max-width: $bp--large) {
+  .search__card {
+    width: 85%;
+
+    &--input {
+      & div {
+        width: 30%;
+      }
+    }
+  }
+}
+

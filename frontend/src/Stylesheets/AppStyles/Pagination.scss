@@ -1,7 +1,7 @@
 .pagination {
   &__card {
     width: 80%;
-    margin: 1rem auto;
+    margin: 2rem auto 1rem auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,7 +20,7 @@
     cursor: pointer;
 
     &:hover {
-        fill: rgb(70, 117, 117);
+      fill: rgb(70, 117, 117);
     }
   }
 
@@ -38,29 +38,40 @@
     flex-wrap: wrap;
 
     & button {
-        text-align: center;
-        padding: .5rem 1rem;
-        margin: 0 .3rem .3rem .3rem;
-        font-size: 1rem;
-        background-color: rgba(17, 41, 41, 0.748);
-        color: rgb(140, 244, 244);
-        border-radius: .5rem;
-        border: .2rem solid transparent;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      margin: 0 0.3rem 0.3rem 0.3rem;
+      font-size: 1rem;
+      background-color: rgba(17, 41, 41, 0.748);
+      color: rgb(140, 244, 244);
+      border-radius: 0.5rem;
+      border: 0.2rem solid transparent;
 
-        &:hover {
-        border: .2rem solid rgb(43, 241, 241); 
-        background-color: rgb(70, 117, 117);    
-        }
+      &:hover {
+        border: 0.2rem solid rgb(43, 241, 241);
+        background-color: rgb(70, 117, 117);
+      }
 
-        &:focus {
-        border: .2rem solid rgb(36, 206, 206);      
-
-        }
+      &:focus {
+        border: 0.2rem solid rgb(36, 206, 206);
+      }
     }
   }
 }
 
 .not__allowed {
-    cursor:not-allowed !important;
-    fill: rgb(167, 206, 213) !important;
+  cursor: not-allowed !important;
+  fill: rgb(167, 206, 213) !important;
+}
+
+@media only screen and (max-width: $bp--large) {
+  .pagination {
+    &__icons--box {
+      flex-basis: 25%;
+    }
+
+    &__buttons {
+      flex-basis: 70%;
+    }
+  }
 }

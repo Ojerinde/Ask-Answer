@@ -48,7 +48,7 @@ const SearchBox = (props) => {
     <Card className="search__card">
       <form onSubmit={submitHandler}>
         <Input
-          label="Title"
+          label="Tag"
           placeholder="Can I know the paticular question you are lokking for?"
           type="text"
           ref={titleRef}

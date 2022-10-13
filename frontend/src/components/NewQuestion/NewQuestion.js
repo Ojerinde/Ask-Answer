@@ -86,7 +86,7 @@ const NewQuestion = () => {
       <Card className="new__question--card">
         <form onSubmit={submitHandler}>
           <Input
-            label="Title"
+            label="Tag"
             type="text"
             placeholder="Give your question a title"
             name="title"

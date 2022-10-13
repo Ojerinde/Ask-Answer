@@ -1,7 +1,7 @@
 .comment {
   &__card {
     width: 70%;
-    margin: 1rem auto;
+    margin: 2rem auto 1rem auto;
     display: flex;
     flex-direction: column;
 
@@ -27,7 +27,16 @@
       font-weight: 400;
       letter-spacing: 0.09rem;
       margin-top: 1rem;
-      border: 0.1rem solid rgba(104, 157, 178, 0.498);
+      border: 0.1rem solid rgba(104, 157, 178, 0.43);
+    }
+  }
+}
+
+@media only screen and (max-width: $bp--large) {
+  .comment {
+    &__card {
+      width: 80%;
+
     }
   }
 }

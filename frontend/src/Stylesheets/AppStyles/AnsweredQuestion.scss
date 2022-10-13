@@ -1,7 +1,7 @@
 .answered_question {
     &__card {
       width: 80%;
-      margin: 1rem auto;
+      margin: 2rem auto 1rem auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -29,3 +29,18 @@
     }
   }
   
+  @media only screen and (max-width: $bp--large) {
+    .answered_question {
+      &__card {
+        width: 85%;
+      }
+    
+      &__text {
+        flex-basis: 65%;
+      }
+    
+      &__button {
+        flex-basis: 30%;
+      }
+    }
+  }

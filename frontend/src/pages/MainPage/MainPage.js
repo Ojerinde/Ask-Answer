@@ -16,6 +16,7 @@ const AnsweredQuestions = lazy(() =>
 
 const MainPage = () => {
   const { track } = useParams();
+
   return (
     <>
       <Header track={track} />
@@ -37,21 +38,15 @@ const MainPage = () => {
                 <ul>
                   <li>
                     <ImLock className="icons" />
-                    <Link to="add_question">
-                     Ask
-                    </Link>
+                    <Link to="add_question">Ask</Link>
                   </li>
                   <li>
                     <ImKey className="icons" />
-                    <Link to="all_questions">
-                     Answer
-                    </Link>
+                    <Link to="all_questions">Answer</Link>
                   </li>
                   <li>
                     <ImUnlocked className="icons" />
-                    <Link to="answered_questions">
-                     Answered
-                    </Link>
+                    <Link to="answered_questions">Answered</Link>
                   </li>
                 </ul>
               </main>

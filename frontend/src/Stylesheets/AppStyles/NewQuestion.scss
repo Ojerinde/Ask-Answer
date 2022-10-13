@@ -9,3 +9,27 @@
     text-align: right;
   }
 }
+
+@media only screen and (max-width: $bp--large) {
+  .new__question {
+    &--card {
+      width: 65%;
+    }
+  }
+}
+
+@media only screen and (max-width: $bp--medium) {
+  .new__question {
+    &--card {
+      width: 75%;
+    }
+  }
+}
+
+@media only screen and (max-width: $bp--small) {
+  .new__question {
+    &--card {
+      width: 80%;
+    }
+  }
+}
