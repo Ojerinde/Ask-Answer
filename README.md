@@ -1,13 +1,18 @@
 # ASK-ANSWER APP
 
+![image](https://user-images.githubusercontent.com/104495751/195710716-47c25b06-cbe6-4afc-a6c3-50c349c493ac.png)
+
+![image](https://user-images.githubusercontent.com/104495751/195710582-8f05fadc-0ca1-4b33-a3ca-3a1e66a719d5.png)
+
 ## Introduction
 
-ASK-ANSWER is built around a RESTful API which performs all CRUD operations. It is an app I am building to practice my Full Stack development skills. 
+ASK-ANSWER is an application where student get to ask question and their tutor get to answer it. The app API is built around a RESTful concepts and it performs all CRUD operations. It is an app I am building to practice my Full Stack development skills. 
 
 The App does the following by the help of the built API,
 * Create question
 * Answer a question
 * Delete question
+* Answer question
 
 
 ## Code Style
@@ -194,8 +199,6 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
-### Endpoints
-
 #### Method: POST
 #### Endpoint: /<track>/add_questions
 * General:
@@ -221,9 +224,6 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
-
-### Endpoints
-
 #### Method: GET
 #### Endpoint: /<track>/all_questions/{question_id}
 * General:
@@ -243,9 +243,6 @@ This application is not deployed and can only be run locally. The backend applic
     }
 }
 ```
-
-
-### Endpoints
 
 #### Method: PATCH
 #### Endpoint: /<track>/all_questions/{question_id}
@@ -283,8 +280,6 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
-### Endpoints
-
 #### Method: GET
 #### Endpoint: /<track>/answered_questions
 * General:
@@ -314,9 +309,6 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
-
-### Endpoints
-
 #### Method: GET
 #### Endpoint: /<track>/answered_questions/{question_id}
 * General:
@@ -336,8 +328,6 @@ This application is not deployed and can only be run locally. The backend applic
     }
 }
 ```
-
-### Endpoints
 
 #### Method: POST
 #### Endpoint: /<track>/all_questions
@@ -410,8 +400,6 @@ This application is not deployed and can only be run locally. The backend applic
 }
 ```
 
-### Endpoints
-
 #### Method: POST
 #### Endpoint: /<track>/all_questions/{question_id}/comments
 * General:
@@ -434,8 +422,6 @@ This application is not deployed and can only be run locally. The backend applic
     "success": true
 }
 ```
-
-### Endpoints
 
 #### Method: GET
 #### Endpoint: /<track>/answered_questions/{question_id}/comments
