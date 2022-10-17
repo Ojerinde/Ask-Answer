@@ -6,12 +6,18 @@ const UserProfile = () => {
   return (
     <Card className="profile__card">
       <figure>
-        <img src={`${user.img}`} />
+        {<img src={`${user.img}`} />|| <p>No Image</p>}
       </figure>
-      <h2>Name: {`${user.name}` || "No Name"}</h2>
       <div>
-        <h4>Email: {`${user.email}` || "No Email"}</h4>
-        <h4>Number: {user.phone ? `${user.phone}` : "No Number"}</h4>
+        <h2>
+          Name: <span>{`${user.name}` || "No Name"}</span>{" "}
+        </h2>
+        <h4>
+          Email: <span>{`${user.email}` || "No Email"}</span>
+        </h4>
+        <h4>
+          Number:<span>{user.phone ? `${user.phone}` : "No Number"}</span>
+        </h4>
       </div>
     </Card>
   );
