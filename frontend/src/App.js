@@ -46,7 +46,7 @@ const App = () => {
       >
         <Routes>
           <Route path="/" exact element={<SignIn />} />
-          <Route path="/home" exact element={<Home />} />
+          <Route path="/home/*" exact element={<Home />} />
 
           {/* Tracks Pages */}
           <Route path="/:track/*" exact element={<MainPage />} />

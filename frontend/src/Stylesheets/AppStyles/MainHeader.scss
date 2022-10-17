@@ -22,14 +22,16 @@
 
     & ul {
       list-style: none;
-      text-align: end;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
   
       & li {
         & a:link,
         & a:visited {
           text-decoration: none;
           padding: 0.5rem 0.8rem;
-          color: #163f45;
+          color: #234f56 !important;
           font-size: 2rem;
           font-weight: 400;
         }
@@ -38,6 +40,21 @@
         & a:active {
           border-radius: 0.7rem;
           background-color: #35a1af;
+        }
+
+        & button {
+          background-color: rgb(11, 44, 61);
+          border: none;
+          cursor: pointer;
+          font-size: 2rem;
+          color: #48cee2;
+          font-weight: 400;
+          margin-left: 1.5rem;
+
+          &:hover {
+            background-color: #35a1af;
+            color: rgb(76, 73, 73) !important;
+          }
         }
       }
     }

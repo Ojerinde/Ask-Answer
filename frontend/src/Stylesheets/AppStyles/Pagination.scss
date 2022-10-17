@@ -16,11 +16,11 @@
   &__icons--next {
     height: 2rem;
     width: 2rem;
-    fill: rgb(52, 68, 68);
+    fill: #344444;
     cursor: pointer;
 
     &:hover {
-      fill: rgb(70, 117, 117);
+      fill: #467575;
     }
   }
 
@@ -43,13 +43,13 @@
       margin: 0 0.3rem 0.3rem 0.3rem;
       font-size: 1rem;
       background-color: rgba(17, 41, 41, 0.748);
-      color: rgb(140, 244, 244);
+      color: #8cf4f4;
       border-radius: 0.5rem;
       border: 0.2rem solid transparent;
 
       &:hover {
         border: 0.2rem solid rgb(43, 241, 241);
-        background-color: rgb(70, 117, 117);
+        background-color: #467575;
       }
 
       &:focus {
