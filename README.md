@@ -14,6 +14,8 @@ The App does the following by the help of the built API,
 * Delete question
 * Answer question
 
+## Authentication
+The application make us of Google authenticator to verify users.
 
 ## Code Style
 All backend code follows [PEP8 style guidelines](https://www.python.org/dev/peps/pep-0008/). 
