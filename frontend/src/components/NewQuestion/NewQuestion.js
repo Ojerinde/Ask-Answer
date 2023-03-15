@@ -1,3 +1,5 @@
+
+
 // React Router Hooks
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -14,7 +16,7 @@ import Input from "../UI/Input/Input";
 import Error from "../UI/Error/Error";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
-// import Modal from "../UI/Modal/Modal";
+
 
 const NewQuestion = () => {
   const navigate = useNavigate();

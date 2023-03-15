@@ -10,6 +10,7 @@ const Pagination = (props) => {
   const total_pages = Math.ceil(totalQuestions / questionPerPage);
 
   const [page, setPage] = useState(1);
+  
   const prevHandler = () => {
     if (page === 1) return;
     setPage((page) => page - 1);

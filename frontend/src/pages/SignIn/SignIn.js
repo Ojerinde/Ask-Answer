@@ -42,7 +42,7 @@ const SignIn = () => {
         console.log("No user");
       }
     });
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
     <Card className="sign_in">

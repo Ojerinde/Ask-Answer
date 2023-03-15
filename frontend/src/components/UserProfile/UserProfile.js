@@ -6,7 +6,7 @@ const UserProfile = () => {
   return (
     <Card className="profile__card">
       <figure>
-        {<img src={`${user.img}`} />|| <p>No Image</p>}
+        {<img src={`${user.img}`} alt={user.name} />|| <p>No Image</p>}
       </figure>
       <div>
         <h2>

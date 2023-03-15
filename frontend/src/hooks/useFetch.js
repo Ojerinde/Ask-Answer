@@ -36,6 +36,7 @@ const useFetch = () => {
           throw new Error(`${requestConfig.errorMessage}`);
         }
         const responseBody = await response.json();
+        console.log(responseBody);
         getQuestionsFromRequest(responseBody);
       } catch (err) {
         dispatchFn({
